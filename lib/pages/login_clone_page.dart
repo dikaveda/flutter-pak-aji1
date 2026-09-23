@@ -2,23 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:belajarflutter/components/costum_textfield.dart';
 import 'package:belajarflutter/components/costum_button.dart';
 
-class LoginClonePage extends StatefulWidget {
-  const LoginClonePage({super.key});
+class LoginClonePage extends StatelessWidget {
+  LoginClonePage({super.key});
 
-  @override
-  State<LoginClonePage> createState() => _LoginClonePageState();
-}
-
-class _LoginClonePageState extends State<LoginClonePage> {
   final TextEditingController txtUsername = TextEditingController();
   final TextEditingController txtPassword = TextEditingController();
-
-  @override
-  void dispose() {
-    txtUsername.dispose();
-    txtPassword.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +38,9 @@ class _LoginClonePageState extends State<LoginClonePage> {
               // Logo TikTok
               Center(
                 child: Image.network(
-                  'https://img.magnific.com/premium-vector/tiktok-app-icon-social-media-logo_277909-647.jpg?semt=ais_hybrid&w=740&q=80',
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHqLVSYIovRFTnEYDUu91TeJdkuEkMFv9tIqaLHs5tw&s=10',
                   height: 50,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Icon(Icons.music_note, size: 50, color: Colors.black);
-                  },
+                  
                 ),
               ),
               const SizedBox(height: 24),

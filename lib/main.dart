@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // 1. Import file login_clone_page Anda (sesuaikan dengan nama file dart Anda)
 import 'package:belajarflutter/pages/login_clone_page.dart'; 
+import 'package:belajarflutter/pages/kalkulator_page.dart'; // Import halaman kalkulator Anda
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // 2. Arahkan home ke class halaman kalkulator Anda
-      home: LoginClonePage(), 
+      home: KalkulatorPage(), 
     );
   }
 }
