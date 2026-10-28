@@ -1,6 +1,5 @@
 import 'package:belajarflutter/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:belajarflutter/pages/kalkulator_page.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 void main() {
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: "My Learning App",
-      initialRoute: Routes.registration,
+      initialRoute: Routes.menudrawer,
       getPages: Routes.myPages,
     );
   }
