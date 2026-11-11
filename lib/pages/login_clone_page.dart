@@ -1,124 +1,114 @@
 import 'package:flutter/material.dart';
-import 'package:belajarflutter/components/costum_textfield.dart';
-import 'package:belajarflutter/components/costum_button.dart';
+import 'package:get/get.dart';
+import 'package:belajarflutter/controller/login_controller.dart';
 
-class LoginClonePage extends StatelessWidget {
-  LoginClonePage({super.key});
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
 
-  final TextEditingController txtUsername = TextEditingController();
-  final TextEditingController txtPassword = TextEditingController();
+  // Inisialisasi controller menggunakan Get.put
+  final LoginController controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white, // Background putih bersih ala clean UI
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        title: const Text('Login Page'),
         elevation: 0,
-        leading: const IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black, size: 28),
-          onPressed: null,
-        ),
-        actions: const [
-          IconButton(
-            icon: Icon(Icons.help_outline, color: Colors.black, size: 28),
-            onPressed: null,
-          ),
-          SizedBox(width: 8),
-        ],
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+         child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 10),
-
-              // Logo TikTok
-              Center(
-                child: Image.network(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHqLVSYIovRFTnEYDUu91TeJdkuEkMFv9tIqaLHs5tw&s=10',
-                  height: 50,
-                  
-                ),
-              ),
-              const SizedBox(height: 24),
-
-              // Judul Halaman
+              const SizedBox(height: 40),
+              // Judul ala aplikasi modern
               const Text(
-                'Masuk',
+                "Welcome Back! 👋",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.black87,
                 ),
               ),
-              const SizedBox(height: 32),
-
-              // Input Username / Email
-              CustomTextField(
-                controller: txtUsername,
-                hintText: 'Email atau nama pengguna',
-              ),
-              const SizedBox(height: 16),
-
-              // Input Password
-              CustomTextField(
-                controller: txtPassword,
-                hintText: 'Kata sandi',
-              ),
-              const SizedBox(height: 16),
-
-              // Option Lupa Kata Sandi
+              const SizedBox(height: 8),
               const Text(
-                'Lupa kata sandi?',
+                "Silakan masuk untuk melanjutkan",
                 style: TextStyle(
-                  color: Colors.black54,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 40),
+
+              // Field Input Username
+              TextField(
+                controller: controller.txtUsername,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  hintText: 'Masukkan username kamu',
+                  prefixIcon: const Icon(Icons.person_outline),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[50],
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Field Input Password
+              TextField(
+                controller: controller.txtPassword,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  hintText: 'Masukkan password kamu',
+                  prefixIcon: const Icon(Icons.lock_outline),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[50],
                 ),
               ),
               const SizedBox(height: 32),
-
-              // Tombol Masuk
+  
+              // Tombol Login / Loading State ala Obx
               SizedBox(
-                width: double.infinity,
-                child: CustomButton(
-                  text: 'Masuk',
-                  onPressed: () {
-                    print('Username: ${txtUsername.text}');
-                    print('Password: ${txtPassword.text}');
-                  },
-                ),
-              ),
-
-              const Spacer(),
-
-              // Footer
-              const Divider(height: 1, color: Colors.black12),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Belum punya akun? ',
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 14,
+                width: double.infinity, // Tombol melebar penuh ke samping
+                height: 50,
+                child: Obx(() {
+                  if (controller.isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return ElevatedButton(
+                      onPressed: () {
+                        controller.login();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black, // Warna tombol tegas ala modern UI
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 0,
                       ),
-                    ),
-                    Text(
-                      'Mendaftar',
-                      style: TextStyle(
-                        color: Color(0xFFFE2C55),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                      child: const Text(
+                        "Log In",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    );
+                  }
+                }),
               ),
             ],
           ),
